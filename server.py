@@ -39,9 +39,12 @@ class Server:
                 data = self.clientsocket.recv(1024).decode()
                 time.sleep(0.001)
                 print(data)
-        except Exception as ex:
-            print("The below error have occured please checkout")
-            print(ex)
+        except OSError:
+            print("System error")
+        except TimeoutError:
+            print("Timeout")
+        except InterruptedError:
+            print("Interrupted")
 
     def chat(self):
         self.Receiving_ciao = threading.Thread(target=self.receive_sms)
